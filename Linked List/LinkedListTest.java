@@ -26,8 +26,9 @@ public class LinkedListTest{
 		//测试入口
 		LinkedListTest test = new LinkedListTest();
 		//test.createList(0);
-		test.createList(10); //头插法创建链表
+		test.createList2(10); //头插法创建链表
 		test.printList(L);
+		System.out.println("第3个结点为：" + test.getNode(L,10));
 		
 	}
 
@@ -35,17 +36,21 @@ public class LinkedListTest{
 	public int getNode(Node  L, int k){
 
 		int value; //返回值定义
-		int j = 0;
-		Node  p = L; //定义p指向头结点
+		int j = 1; //从第一个结点开始
+		Node  p = L.next; //定义p从头结点不断后移
 
-		while ( p.next==null && j < k){
+		//添加判断,k<=0,应返回第一个结点
+		if(k <= 0) k=1;
+
+		while ( p.next != null && j < k){
 			p = p.next;
 			j++ ;
 		}
-
-		if( p.next!=null || j > k){
+		
+		if( j < k){ //到链表末尾了,仍旧未到k
 			return -1; //没有第k个结点
 		}
+
 		value = p.data;
 		return value;
 	}
