@@ -1,5 +1,9 @@
 public class SortTest{
-	
+	public static void main(String[] args) {
+		int[] array = {7,4,2,8,4,5,9,10};
+		SortUtil.selectSort(array);
+		SortUtil.printArray(array);
+	}
 }
 
 class SortUtil{
@@ -18,6 +22,25 @@ class SortUtil{
 			}
 		}
 	}
+
+	//1.选择排序的实现方式之二，堆内存中交换过于频繁，可以在栈内存中先存储需要调换的下标，最终一次循环只需要调换一次即可
+	static void selectSort2(int[] arr){
+		int temp,k;
+
+		for(int i = 0; i < arr.length-1; i++){
+			k = i;
+			for (int j = i+1; j < arr.length ; j++ ) {
+				if(arr[k] > arr[j]){
+					k = j;
+				}
+			}
+			if(k!=i){
+				temp = arr[i];
+				arr[i] = arr[k];
+				arr[k] = temp;	
+			}
+		}
+	}	
 
 	//2.冒泡排序的实现方法之一
 	static void bubbleSort(int[] arr){
@@ -49,11 +72,15 @@ class SortUtil{
 		}
 	}
 
-	//2.冒泡排序的实现方式之三，堆内存中交换过于频繁，可以在栈内存中先存储需要调换的下标，最终一次循环只需要调换一次即可
-	static void bubbleSort3(int[] arr){
-		
-	}
+
 	//3
 	//4.
 	//5.
+	//
+	
+	static void printArray(int[] arr){
+		for(int i = 0; i < arr.length; i++){
+			System.out.println(arr[i]);
+		}
+	}
 }
