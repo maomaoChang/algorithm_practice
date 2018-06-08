@@ -9,28 +9,18 @@ public class LinkedListTest{
 
 	public static Node  L; //单链表定义
 
-	//内部类,链表结点定义
-	class Node {
-		int  data;  //数据域
-	    Node next; //指针域
-
-	    Node(){ //保留空构造函数
-
-	    }
-	    Node(int data){
-	    	this.data = data;
-	    }
-	}	
-
 	public static void main(String[] args) {
 		//测试入口
 		LinkedListTest test = new LinkedListTest();
 		//test.createList(0);
-		test.createList2(10); //头插法创建链表
+		test.createList2(5); //头插法创建链表
 		test.printList(L);
 		System.out.println("链表L的长度为：" + test.getLength(L));
 		System.out.println("第3个结点为：" + test.getNode(L,3));
-
+		System.out.println("插入结果：" + test.insertNode(new Node(888),7));
+		System.out.println("链表L的长度为：" + test.getLength(L));
+		System.out.println("第3个结点为：" + test.getNode(L,3));
+		test.printList(L);
 		
 	}
 
@@ -72,7 +62,29 @@ public class LinkedListTest{
 		return len;
 	}
 
-	//插入结点
+	//插入结点,为k位置
+	public boolean insertNode(Node q, int k){
+		if(k <= 0){ //插入首部
+			k=1;
+		}
+
+		Node p = L;
+		int j = 1; //从第一个结点开始
+		//注意条件里写j++和在循环里写j++的区别
+		while( p != null && j < k){ 
+			p = p.next;
+			j++;
+		}
+		System.out.println(j);
+		if( p == null || j < k){
+			return false; //插入位置不正确
+		}
+
+		q.next = p.next;
+		p.next = q;
+
+		return true; 
+	}
 	//删除结点
 	
 	//整表创建,长度为N的单链表(新)
@@ -147,4 +159,16 @@ public class LinkedListTest{
 }
 
 
+//内部类,链表结点定义
+class Node {
+	int  data;  //数据域
+    Node next; //指针域
+
+    Node(){ //保留空构造函数
+
+    }
+    Node(int data){
+    	this.data = data;
+    }
+}
 
