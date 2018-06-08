@@ -28,7 +28,9 @@ public class LinkedListTest{
 		//test.createList(0);
 		test.createList2(10); //头插法创建链表
 		test.printList(L);
-		System.out.println("第3个结点为：" + test.getNode(L,10));
+		System.out.println("链表L的长度为：" + test.getLength(L));
+		System.out.println("第3个结点为：" + test.getNode(L,3));
+
 		
 	}
 
@@ -55,9 +57,23 @@ public class LinkedListTest{
 		return value;
 	}
 
-	//遍历
-	//插入
-	//删除
+	//获取链表长度
+	public int getLength(Node L){
+		if(L.next == null){
+			return -1; //空链表
+		}
+
+		int len = 0;
+		Node p = L;
+		while(p.next != null){
+			len++;
+			p = p.next;
+		}
+		return len;
+	}
+
+	//插入结点
+	//删除结点
 	
 	//整表创建,长度为N的单链表(新)
 	public void createList(int N){
@@ -108,6 +124,10 @@ public class LinkedListTest{
 
 
 	//整表删除 
+	
+	//链表的冒泡排序
+	
+	//链表的选择排序
 	
 	//打印链表内容
 	public void printList(Node L){
