@@ -17,10 +17,13 @@ public class LinkedListTest{
 		test.printList(L);
 		System.out.println("链表L的长度为：" + test.getLength(L));
 		System.out.println("第3个结点为：" + test.getNode(L,3));
-		System.out.println("插入结果：" + test.insertNode(new Node(888),7));
+		System.out.println("插入结果：" + test.insertNode(new Node(888),6));
 		System.out.println("链表L的长度为：" + test.getLength(L));
 		System.out.println("第3个结点为：" + test.getNode(L,3));
 		test.printList(L);
+		System.out.println("删除的结点为：" + test.deleteNode(0));
+		test.printList(L);
+		System.out.println("链表L的长度为：" + test.getLength(L));
 		
 	}
 
@@ -75,7 +78,7 @@ public class LinkedListTest{
 			p = p.next;
 			j++;
 		}
-		System.out.println(j);
+		//System.out.println(j);
 		if( p == null || j < k){
 			return false; //插入位置不正确
 		}
@@ -86,6 +89,29 @@ public class LinkedListTest{
 		return true; 
 	}
 	//删除结点
+	public int deleteNode(int k){
+
+		//1.判断k是否合法 
+		if(k <= 0){
+			k = 1; //默认删除第一个结点
+		}
+		//2.遍历链表,找到第k个结点
+		Node p = L;
+		int j = 1;
+		int value;
+		while ( p != null && j < k){
+			p = p.next;
+			j++;
+		}
+		//3.删除该结点,并返回第k个结点的value
+		if( p.next == null || j < k){ //这里能否和插入结点保持统一？
+			return -1; //表示无第k个结点
+		}
+
+		value = p.next.data;
+		p.next = p.next.next;
+		return value;
+	}
 	
 	//整表创建,长度为N的单链表(新)
 	public void createList(int N){
