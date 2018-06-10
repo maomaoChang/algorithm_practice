@@ -1,7 +1,7 @@
 public class SortTest{
 	public static void main(String[] args) {
 		int[] array = {7,4,2,8,4,5,9,10};
-		SortUtil.selectSort(array);
+		SortUtil.quickSort(array);
 		SortUtil.printArray(array);
 	}
 }
@@ -73,7 +73,41 @@ class SortUtil{
 	}
 
 
-	//3
+	//3-1.快速排序入口
+	static void quickSort(int[] arr){
+		if(arr.length > 0){
+			quickSortImpl(arr, 0, arr.length -1);
+		}
+	}
+
+	//3-2. 快速排序具体实现
+	static void quickSortImpl(int[] arr, int low, int high){
+		if(low < high){
+			int middle = getMiddle(arr,low,high);
+			quickSortImpl(arr,0,middle-1);
+			quickSortImpl(arr,middle+1,high);
+		}
+	}
+
+	//3-3. 快排中间过程,找基准值
+    private static int getMiddle(int[] arr, int low, int high) {
+        int temp = arr[low];//基准元素
+        while(low<high){
+            //找到比基准元素小的元素位置
+            while(low<high && arr[high]>=temp){
+                high--;
+            }
+            arr[low] = arr[high]; 
+            while(low<high && arr[low]<=temp){
+                low++;
+            }
+            arr[high] = arr[low];
+        }
+        arr[low] = temp;
+        return low;
+    }
+
+    	
 	//4.
 	//5.
 	//
@@ -83,4 +117,6 @@ class SortUtil{
 			System.out.println(arr[i]);
 		}
 	}
+
+
 }
