@@ -1,8 +1,9 @@
 public class SortTest{
 	public static void main(String[] args) {
 		int[] array = {7,4,2,8,4,5,9,10};
-		SortUtil.quickSort(array);
-		SortUtil.printArray(array);
+		int[] array2 = {5,7,3,2,6,8,4};
+		SortUtil.quickSort(array2);
+		SortUtil.printArray(array2);
 	}
 }
 
@@ -84,30 +85,30 @@ class SortUtil{
 	static void quickSortImpl(int[] arr, int low, int high){
 		if(low < high){
 			int middle = getMiddle(arr,low,high);
-			quickSortImpl(arr,0,middle-1);
-			quickSortImpl(arr,middle+1,high);
+			quickSortImpl(arr,0,middle-1); //前半部分数组再排序
+			quickSortImpl(arr,middle+1,high);//后半部分
 		}
 	}
 
 	//3-3. 快排中间过程,找基准值
-    private static int getMiddle(int[] arr, int low, int high) {
-        int temp = arr[low];//基准元素
-        while(low<high){
-            //找到比基准元素小的元素位置
-            while(low<high && arr[high]>=temp){
-                high--;
-            }
-            arr[low] = arr[high]; 
-            while(low<high && arr[low]<=temp){
-                low++;
-            }
-            arr[high] = arr[low];
-        }
-        arr[low] = temp;
-        return low;
-    }
+	private static int getMiddle(int[] arr, int low, int high) {
+		int temp = arr[low];//基准元素
+		while(low<high){
+		    //找到比基准元素小的元素位置
+		    while(low<high && arr[high]>=temp){
+		        high--;
+		    }
+		    arr[low] = arr[high]; //将低于基准元素的high位置元素放到前面去
+		    while(low<high && arr[low]<=temp){
+		        low++;
+		    }
+		    arr[high] = arr[low]; //将在low位,但值大于基准元素的数据放到high位置
+		}
+		arr[low] = temp; //此时low=high
+		return low;
+	}
 
-    	
+
 	//4.
 	//5.
 	//
