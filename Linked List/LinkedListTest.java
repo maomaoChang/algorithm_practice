@@ -24,6 +24,8 @@ public class LinkedListTest{
 		System.out.println("删除的结点为：" + test.deleteNode(0));
 		test.printList(L);
 		System.out.println("链表L的长度为：" + test.getLength(L));
+		System.out.println("清空链表是否成功： " + test.clearList(L));
+		System.out.println("清空后链表L的长度为：" + test.getLength(L));
 		
 	}
 
@@ -161,7 +163,14 @@ public class LinkedListTest{
 	}
 
 
-	//整表删除 
+	//整表删除
+	public boolean clearList(Node L){
+
+		//整表删除,不同于C++中需要free每一个结点,只要使L头结点的指针域为null即可
+		L.next = null; 
+		//L = null; //为什么这句就不行？
+		return true;
+	}
 	
 	//链表的冒泡排序
 	
