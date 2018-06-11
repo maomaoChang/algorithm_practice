@@ -2,8 +2,8 @@ public class SortTest{
 	public static void main(String[] args) {
 		int[] array = {7,4,2,8,4,5,9,10};
 		int[] array2 = {5,7,3,2,6,8,4};
-		SortUtil.quickSort(array2);
-		SortUtil.printArray(array2);
+		SortUtil.insertSort(array);
+		SortUtil.printArray(array);
 	}
 }
 
@@ -109,7 +109,19 @@ class SortUtil{
 	}
 
 
-	//4.
+	//4.插入排序方法1,直接插入排序
+	public static void insertSort(int[] arr){
+		int len = arr.length;
+		for(int i = 1; i < len; i++){
+			int j = i - 1;
+			int temp = arr[i];
+			while(j > -1 && temp < arr[j]){
+				arr[j+1] = arr[j];
+				j--;
+			}
+			arr[j+1] = temp;
+		}
+	}
 	//5.
 	//
 	
