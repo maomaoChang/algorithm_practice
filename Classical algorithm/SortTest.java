@@ -9,7 +9,7 @@ public class SortTest{
 
 class SortUtil{
 
-	//1.选择排序
+	//1.1 选择排序
 	static void selectSort(int[] arr){
 		int temp;
 
@@ -24,7 +24,7 @@ class SortUtil{
 		}
 	}
 
-	//1.选择排序的实现方式之二，堆内存中交换过于频繁，可以在栈内存中先存储需要调换的下标，最终一次循环只需要调换一次即可
+	//1.2 选择排序的实现方式之二，堆内存中交换过于频繁，可以在 栈内存中先存储需要调换的下标，最终一次循环只需要调换一次即可
 	static void selectSort2(int[] arr){
 		int temp,k;
 
@@ -43,7 +43,7 @@ class SortUtil{
 		}
 	}	
 
-	//2.冒泡排序的实现方法之一
+	//2.1冒泡排序的实现方法之一
 	static void bubbleSort(int[] arr){
 		int temp;
 		for(int i = 0; i < arr.length-1; i++){
@@ -58,7 +58,7 @@ class SortUtil{
 		}
 	}
 
-	//2.冒泡排序的实现方法之二,只是循环方式发生了变化
+	//2.2冒泡排序的实现方法之二,只是循环方式发生了变化
 	static void bubbleSort2(int[] arr){
 		int temp;
 		for(int i = arr.length - 1; i > 0; i--){ //从后往前
@@ -109,22 +109,25 @@ class SortUtil{
 	}
 
 
-	//4.插入排序方法1,直接插入排序
+	//4.1插入排序方法1,直接插入排序
 	public static void insertSort(int[] arr){
 		int len = arr.length;
 		for(int i = 1; i < len; i++){
 			int j = i - 1;
 			int temp = arr[i];
-			while(j > -1 && temp < arr[j]){
+			while(j > -1 && arr[j] > temp){ //如果当前位置比temp大,就往后挪一位
 				arr[j+1] = arr[j];
 				j--;
 			}
-			arr[j+1] = temp;
+			arr[j+1] = temp; //将temp,也就是arr[i]放入排好序的位置
 		}
 	}
+
+	//4.2 插入排序方法2,二分插入排序
+	//4.3 插入排序方法3,链表插入
 	//5.
-	//
 	
+	//打印数组
 	static void printArray(int[] arr){
 		for(int i = 0; i < arr.length; i++){
 			System.out.println(arr[i]);
