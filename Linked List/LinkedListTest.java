@@ -4,6 +4,8 @@
  * @date: 2018-06-04
  */
 import java.util.Random;
+import java.util.Stack;
+import java.util.Enumeration;
 
 public class LinkedListTest{
 
@@ -24,8 +26,10 @@ public class LinkedListTest{
 		System.out.println("删除的结点为：" + test.deleteNode(0));
 		test.printList(L);
 		System.out.println("链表L的长度为：" + test.getLength(L));
-		System.out.println("清空链表是否成功： " + test.clearList(L));
-		System.out.println("清空后链表L的长度为：" + test.getLength(L));
+		//System.out.println("清空链表是否成功： " + test.clearList(L));
+		//System.out.println("清空后链表L的长度为：" + test.getLength(L));
+		System.out.println("用递归实现的递归打印链表：");
+		printReverse1(L);
 		
 	}
 
@@ -175,6 +179,52 @@ public class LinkedListTest{
 	//链表的冒泡排序
 	
 	//链表的选择排序
+	
+	//链表从尾到头打印,用递归实现
+	public static void printReverse1(Node L){
+		//L是头结点,第一个结点为L.next
+		if( L.next != null){
+			printReverse1(L.next);
+			System.out.println(L.next.data);
+		}
+	}
+
+	//链表从尾到头打印,用堆栈实现
+	public static void printReverse2(Node L){
+
+		Stack<Integer> stack = new Stack<Integer>();
+		
+		if(L != null){
+			Node p = L.next;
+			while(p != null){				
+				stack.add(p.data);	
+				p = p.next;		
+			}			
+		}
+
+		int stackSize = stack.size();
+		System.out.print("用堆栈实现的逆序打印： ");
+		while(stackSize-- > 0){
+			System.out.print(stack.pop()+"  ");
+		}
+
+		/*
+		//打印堆栈内容
+        if (stack.empty()){
+             System.out.println("堆栈是空的，没有元素");
+        }
+        else {
+                System.out.print("堆栈中的元素：");
+                Enumeration items = stack.elements(); // 得到 stack 中的枚举对象
+                while (items.hasMoreElements()) //显示枚举（stack ） 中的所有元素
+                    System.out.print(items.nextElement()+" ");
+        }
+        */
+
+
+	}
+
+	//查找链表倒数第K个元素
 	
 	//打印链表内容
 	public void printList(Node L){
