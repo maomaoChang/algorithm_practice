@@ -9,32 +9,40 @@ import java.util.Enumeration;
 
 public class LinkedListTest{
 
-	public static Node  L; //单链表定义
+	public static  Node  L; //单链表定义
 
 	public static void main(String[] args) {
 		//测试入口
-		LinkedListTest test = new LinkedListTest();
+		//LinkedListTest test = new LinkedListTest();
 		//test.createList(0);
-		test.createList2(5); //头插法创建链表
-		test.printList(L);
-		System.out.println("链表L的长度为：" + test.getLength(L));
-		System.out.println("第3个结点为：" + test.getNode(L,3));
-		System.out.println("插入结果：" + test.insertNode(new Node(888),6));
-		System.out.println("链表L的长度为：" + test.getLength(L));
-		System.out.println("第3个结点为：" + test.getNode(L,3));
-		test.printList(L);
-		System.out.println("删除的结点为：" + test.deleteNode(0));
-		test.printList(L);
-		System.out.println("链表L的长度为：" + test.getLength(L));
+		System.out.println("生成结点过程：");
+		createList2(5); //头插法创建链表
+		//printList(L);
+		//System.out.println("链表L的长度为：" + getLength(L));
+		//System.out.println("第3个结点为：" + getNode(L,3));
+		System.out.println("插入结果888至末尾：" + insertNode(new Node(888),6));
+		//System.out.println("链表L的长度为：" + getLength(L));
+		//System.out.println("第3个结点为：" + getNode(L,3));
+		System.out.println("插入尾结点888后: ");
+		printList(L);
+		System.out.println("删除的结点为：" + deleteNode(0));
+		System.out.println("删除首结点后: ");
+		printList(L);
+		//System.out.println("链表L的长度为：" + getLength(L));
 		//System.out.println("清空链表是否成功： " + test.clearList(L));
 		//System.out.println("清空后链表L的长度为：" + test.getLength(L));
-		System.out.println("用递归实现的递归打印链表：");
-		printReverse1(L);
+		//System.out.println("用递归实现的递归打印链表：");
+		//test.printReverse1(L);
+		//test.reverseList1(L);
+		//System.out.println("执行链表反转：");
+		//reverseList2(L);
+		System.out.println("链表反转以后为: ");
+		printList(reverseList2(L));
 		
 	}
 
 	//读取第k个节点
-	public int getNode(Node  L, int k){
+	public static int getNode(Node  L, int k){
 
 		int value; //返回值定义
 		int j = 1; //从第一个结点开始
@@ -57,7 +65,7 @@ public class LinkedListTest{
 	}
 
 	//获取链表长度
-	public int getLength(Node L){
+	public static int getLength(Node L){
 		if(L.next == null){
 			return -1; //空链表
 		}
@@ -72,7 +80,7 @@ public class LinkedListTest{
 	}
 
 	//插入结点,为k位置
-	public boolean insertNode(Node q, int k){
+	public static boolean insertNode(Node q, int k){
 		if(k <= 0){ //插入首部
 			k=1;
 		}
@@ -95,7 +103,7 @@ public class LinkedListTest{
 		return true; 
 	}
 	//删除结点
-	public int deleteNode(int k){
+	public static int deleteNode(int k){
 
 		//1.判断k是否合法 
 		if(k <= 0){
@@ -120,7 +128,7 @@ public class LinkedListTest{
 	}
 	
 	//整表创建,长度为N的单链表(新)
-	public void createList(int N){
+	public static void createList(int N){
 		//1.声明结点P和计数器变量i
 		//2.初始化空链表L
 		//3.L的指针域设为空，即建立一个带头结点的单链表
@@ -144,7 +152,7 @@ public class LinkedListTest{
 		}
 	}
 	//整表创建2,将新增结点放入尾部，而非头部
-	public void createList2(int N){
+	public static void createList2(int N){
 		
 		L = new Node(); //空链表定义
 		L.next = null;
@@ -168,7 +176,7 @@ public class LinkedListTest{
 
 
 	//整表删除
-	public boolean clearList(Node L){
+	public static boolean clearList(Node L){
 
 		//整表删除,不同于C++中需要free每一个结点,只要使L头结点的指针域为null即可
 		L.next = null; 
@@ -210,24 +218,80 @@ public class LinkedListTest{
 
 		/*
 		//打印堆栈内容
-        if (stack.empty()){
-             System.out.println("堆栈是空的，没有元素");
-        }
-        else {
-                System.out.print("堆栈中的元素：");
-                Enumeration items = stack.elements(); // 得到 stack 中的枚举对象
-                while (items.hasMoreElements()) //显示枚举（stack ） 中的所有元素
-                    System.out.print(items.nextElement()+" ");
-        }
+		if (stack.empty()){
+		     System.out.println("堆栈是空的，没有元素");
+		}
+		else {
+		        System.out.print("堆栈中的元素：");
+		        Enumeration items = stack.elements(); // 得到 stack 中的枚举对象
+		        while (items.hasMoreElements()) //显示枚举（stack ） 中的所有元素
+		            System.out.print(items.nextElement()+" ");
+		}
         */
 
 
 	}
 
+	//链表反转实现1(当链表没有头结点时)
+	public static void reverseList1(Node L){
+
+		if(L == null){
+            System.out.println("空链表,无法反转");
+        }
+
+		Node p = L; //L若没有头结点,则p初始指向第一个结点
+		Node prior = null; //p结点的前继结点
+		Node pNext = null; //p结点的后继结点
+		//Node newL = null;//新链表的表头 
+
+		while( p != null){
+			pNext = p.next; //先获取后继结点
+
+			if(pNext == null){
+				L = p; //L指向新链表的末尾,循环结束
+				break;
+			}
+
+			p.next = prior;
+
+			prior = p;
+			p = pNext;
+		}		
+	}
+
+	//链表反转实现2(当链表由头结点时)
+    public static Node reverseList2(Node L){
+
+    	if(L.next == null){
+            System.out.println("空链表,无法反转");    		
+    	}
+		Node p = L.next; 
+		Node prior = null; //p结点的前继结点
+		Node pNext = null; //p结点的后继结点
+		Node newHead = null; //返回新链表(如果操作才能使得L指向新链表)
+
+		while(p != null) {
+
+			pNext = p.next;
+
+			if(pNext == null){
+				Node endNode = new Node();
+				endNode.next = p;
+				newHead = endNode; //新链表的表头
+				//break; //此处不能用break,因为还没定义p的前继
+			}
+			p.next = prior; //定义p前驱
+			prior = p;      //前驱后移
+			p = pNext;      //当前结点后移
+		}
+
+		return newHead;
+    }
+
 	//查找链表倒数第K个元素
 	
 	//打印链表内容
-	public void printList(Node L){
+	public static void printList(Node L){
 		int i = 0;
 		Node p = L;
 		/*do {
