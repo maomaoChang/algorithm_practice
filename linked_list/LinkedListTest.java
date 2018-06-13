@@ -31,13 +31,16 @@ public class LinkedListTest{
 		//System.out.println("链表L的长度为：" + getLength(L));
 		//System.out.println("清空链表是否成功： " + test.clearList(L));
 		//System.out.println("清空后链表L的长度为：" + test.getLength(L));
+		
 		//System.out.println("用递归实现的递归打印链表：");
+		
 		//test.printReverse1(L);
-		//test.reverseList1(L);
-		//System.out.println("执行链表反转：");
-		//reverseList2(L);
-		System.out.println("链表反转以后为: ");
-		printList(reverseList2(L));
+
+		//System.out.println("链表反转以后为: ");
+		//test.reverseList1(L);//
+		//printList(reverseList2(L));
+
+		System.out.println("倒数第" + 2 + "个结点的值为：" + findKofBack(L,2));
 		
 	}
 
@@ -288,7 +291,34 @@ public class LinkedListTest{
 		return newHead;
     }
 
-	//查找链表倒数第K个元素
+	//查找链表倒数第K个元素,先遍历获取链表长度,然后再第二次遍历
+	public static int findKofBack(Node L, int k){
+
+		if( L.next == null){
+			System.out.println("空链表,无法获取第" + k + "个值");
+			return -999;
+		}
+
+		int len = 0;
+		Node p = L;
+		while(p.next != null){
+			p = p.next;
+			len++;
+		}
+
+		p = L; // 遍历完成后,p重新指向表头
+
+		if(len < k){
+			System.out.println("链表总长度为" + len + " , 小于" + k);
+			return -999;
+		}
+
+		for(int i = 1; i <= len+1-k; i++){
+			p=p.next;
+		}
+
+		return p.data; 
+	}
 	
 	//打印链表内容
 	public static void printList(Node L){
