@@ -40,7 +40,8 @@ public class LinkedListTest{
 		//test.reverseList1(L);//
 		//printList(reverseList2(L));
 
-		System.out.println("倒数第" + 2 + "个结点的值为：" + findKofBack(L,2));
+		//System.out.println("倒数第" + 2 + "个结点的值为：" + findKofBack(L,2));
+		System.out.println("倒数第" + 2 + "个结点的值为：" + findKofBack2(L,6));
 		
 	}
 
@@ -318,6 +319,32 @@ public class LinkedListTest{
 		}
 
 		return p.data; 
+	}
+
+	//查找链表倒数第K个元素,用两个指针p1,p2实现
+	public static int findKofBack2(Node L, int k){
+		//1.判断L是否为空
+		
+		Node p1 = L;
+		Node p2 = L;
+		int i;
+
+		//跳出循环时,p1指向第k个结点(也可以理解为p1比p2提前了k个结点)
+		for(i = 0; p1!=null && i < k; i++){
+			p1 = p1.next;
+		}
+		if(p1 == null){
+			System.out.println("链表总长度为" + (i-1) + ", 小于" + k); //此处(i-1)为链表长度
+			return -999;
+		}
+		while(p1 != null){ // 假设链表长度为len,p1已经指向第k个, p1需要移动(len-k+1)次。而倒数第k个正好就是正数第(len-k+1)
+			p1 = p1.next;
+			p2 = p2.next;
+		}
+
+		return p2.data; 
+
+
 	}
 	
 	//打印链表内容
